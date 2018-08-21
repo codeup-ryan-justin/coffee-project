@@ -7,8 +7,8 @@ function renderCoffee(coffee) {
     // html += '<td>' + coffee.roast + '</td>';
     // html += '</tr>';
     let html = '<div class="coffee col-6 d-flex align-items-baseline" id="' + coffee.id + '">';
-    html += '<h6 class="coffee inline">' + coffee.name + '</h6>';
-    html += '<p class="roast inline text-secondary">' + coffee.roast + '</p>';
+    html += '<h3 class="coffee inline">' + coffee.name + '</h3>';
+    html += '<p class="roast inline text-secondary pl-2">' + coffee.roast + '</p>';
     html += '</div>';
 
     return html;
@@ -19,17 +19,20 @@ function renderCoffees(coffees) {
     for(var i = 0; i < coffees.length; i++) {
         html += renderCoffee(coffees[i]);
     }
-
     return html += "</div>";
 }
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
     var selectedRoast = roastSelection.value;
+    if (selectedRoast === "all") {
+        contentBody.innerHTML = renderCoffees(coffees);
+        return
+    }
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
         if (coffee.roast === selectedRoast) {
-            filteredCoffees.push();
+            filteredCoffees.push(coffee);
         }
     });
     contentBody.innerHTML = renderCoffees(filteredCoffees);
