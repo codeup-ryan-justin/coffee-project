@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 function renderCoffee(coffee) {
     // var html = '<tr class="coffee">';
@@ -6,9 +6,9 @@ function renderCoffee(coffee) {
     // html += '<td>' + coffee.name + '</td>';
     // html += '<td>' + coffee.roast + '</td>';
     // html += '</tr>';
-    let html = '<div class="coffee col-6" id="' + coffee.id + '">';
-    html += '<h1 class="inline">' + coffee.name + '</h1>';
-    html += '<p class="inline">' + coffee.roast + '</p>';
+    let html = '<div class="coffee col-6 d-flex align-items-baseline" id="' + coffee.id + '">';
+    html += '<h6 class="coffee inline">' + coffee.name + '</h6>';
+    html += '<p class="roast inline text-secondary">' + coffee.roast + '</p>';
     html += '</div>';
 
     return html;
