@@ -16,7 +16,7 @@ function renderCoffee(coffee) {
 
 function renderCoffees(coffees) {
     var html = '<div class="row">';
-    for(var i = 0; i < coffees.length; i++) {
+    for (var i = 0; i < coffees.length; i++) {
         html += renderCoffee(coffees[i]);
     }
     return html += "</div>";
@@ -24,30 +24,23 @@ function renderCoffees(coffees) {
 
 function updateCoffees(e) {
     e.preventDefault(); // don't submit the form, we just want to update the data
-    var selectedRoast = roastSelection.value;
+    let selectedRoast = roastSelection.value;
+    let filterCoffee = coffeeSearch.value;
+    let filteredCoffees = [];
     if (selectedRoast === "all") {
-        contentBody.innerHTML = renderCoffees(coffees);
-        return
+        coffees.forEach(function (coffee) {
+            if (coffee.name.toLowerCase().startsWith(filterCoffee)) {
+                filteredCoffees.push(coffee);
+            }
+        });
+    } else {
+        coffees.forEach(function (coffee) {
+            if (coffee.roast === selectedRoast && coffee.name.toLowerCase().startsWith(filterCoffee)) {
+                filteredCoffees.push(coffee);
+            }
+        });
     }
-    var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
-        }
-    });
     contentBody.innerHTML = renderCoffees(filteredCoffees);
-}
-
-function searchCoffee() {
-
-    var filteredCoffees = [];
-    coffees.forEach(function(coffee) {
-        if (coffee.name.toLowerCase().startsWith(coffeeSearch.value)) {
-            filteredCoffees.push(coffee);
-        }
-    });
-    contentBody.innerHTML = renderCoffees(filteredCoffees);
-
 }
 
 // from http://www.ncausa.org/About-Coffee/Coffee-Roasts-Guide
@@ -77,4 +70,4 @@ contentBody.innerHTML = renderCoffees(coffees);
 
 submitButton.addEventListener('click', updateCoffees);
 roastSelection.addEventListener('change', updateCoffees);
-coffeeSearch.addEventListener('input', searchCoffee);
+coffeeSearch.addEventListener('input', updateCoffees);
