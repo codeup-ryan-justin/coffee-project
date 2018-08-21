@@ -6,7 +6,7 @@ function renderCoffee(coffee) {
     // html += '<td>' + coffee.name + '</td>';
     // html += '<td>' + coffee.roast + '</td>';
     // html += '</tr>';
-    let html = '<div class="coffee" id="' + coffee.id + '">';
+    let html = '<div class="coffee col-6" id="' + coffee.id + '">';
     html += '<h1 class="inline">' + coffee.name + '</h1>';
     html += '<p class="inline">' + coffee.roast + '</p>';
     html += '</div>';
@@ -15,11 +15,12 @@ function renderCoffee(coffee) {
 }
 
 function renderCoffees(coffees) {
-    var html = '';
-    for(var i = coffees.length - 1; i >= 0; i--) {
+    var html = '<div class="row">';
+    for(var i = 0; i < coffees.length; i++) {
         html += renderCoffee(coffees[i]);
     }
-    return html;
+
+    return html += "</div>";
 }
 
 function updateCoffees(e) {
@@ -28,7 +29,7 @@ function updateCoffees(e) {
     var filteredCoffees = [];
     coffees.forEach(function(coffee) {
         if (coffee.roast === selectedRoast) {
-            filteredCoffees.push(coffee);
+            filteredCoffees.push();
         }
     });
     contentBody.innerHTML = renderCoffees(filteredCoffees);
