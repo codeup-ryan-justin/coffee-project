@@ -51,6 +51,9 @@ function updateCoffees(e) {
 function createCoffee(e) {
     e.preventDefault();
     let nameTextBox = document.getElementById("coffee-adding");
+    if(nameTextBox.value === ""){
+        return;
+    }
     let id = coffees.length + 1;
     let coffee = {
         id: id,
