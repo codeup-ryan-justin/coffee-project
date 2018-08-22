@@ -96,6 +96,13 @@ contentBody.innerHTML = renderCoffees(coffees);
 submitButton.addEventListener('click', updateCoffees);
 roastSelection.addEventListener('change', updateCoffees);
 coffeeSearch.addEventListener('input', updateCoffees);
+
+// prevent pressing enter from refreshing the page
+coffeeSearch.addEventListener('keypress', function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+    }
+});
 coffeeAdd.addEventListener('click', createCoffee);
 
 // listen for the enter key press and use it to submit the new coffee
