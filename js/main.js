@@ -48,18 +48,27 @@ function updateCoffees(e) {
     contentBody.innerHTML = renderCoffees(filteredCoffees);
 }
 
-function createCoffee(e) {
+function createCoffee(e){
     e.preventDefault();
     let nameTextBox = document.getElementById("coffee-adding");
+    let roastSelection = document.getElementById("roast-adding");
     if(nameTextBox.value === ""){
         return;
+    }
+    for(var i = 0; i < coffees.length; i++) {
+        if (nameTextBox.value.toLowerCase() === coffees[i].name.toLowerCase() && roastSelection.value === coffees[i].roast) {
+            console.log(coffees[i], nameTextBox);
+            nameTextBox.value = "";
+            return;
+        }
     }
     let id = coffees.length + 1;
     let coffee = {
         id: id,
         name: nameTextBox.value,
-        roast: document.getElementById("roast-adding").value,
+        roast: roastSelection.value,
     };
+
     nameTextBox.value = "";
     coffees.push(coffee);
     addedCoffees.push(coffee);
