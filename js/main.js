@@ -132,9 +132,10 @@ function getCoffeeFromLocalStorage() {
 }
 
 function clearCoffeeFromLocalStorage() {
-    if(localStorage.coffees) {}
-    localStorage.removeItem('coffees');
-    resetCoffees();
+    if(localStorage.coffees) {
+        localStorage.removeItem('coffees');
+        resetCoffees();
+    }
 }
 
 // when page has finished loading call getCoffeeFromLocalStorage
