@@ -23,7 +23,7 @@
 
         <div class="row">
             <div class="col-12">
-                <hr>
+                <hr class="w-100">
             </div>
 
         </div>
@@ -49,21 +49,42 @@
 
             <div class="col-6">
                 <form>
-                    <label for="roast-selection">Roast</label>
+                    <label for="roast-selection" class="font-weight-bold">Roast</label>
                     <select class="custom-select" id="roast-selection">
                         <option selected>all</option>
                         <option>light</option>
                         <option>medium</option>
                         <option>dark</option>
                     </select>
-                    <label for="coffee-search">Coffee Name</label>
+                    <label for="coffee-search" class="font-weight-bold mt-2">Coffee Name</label>
                     <div class="input-group">
                         <input id="coffee-search" type="text" class="form-control"/>
                     </div>
                     <button class="btn btn-primary w-100 mt-4" id="submit" type="button">Submit</button>
                 </form>
+
+
+                <hr class="w-100">
+
+                <h2 class="text-center">Add a Coffee</h2>
+
+                <form>
+                    <label for="roast-adding" class="font-weight-bold">Roast</label>
+                    <select class="custom-select" id="roast-adding">
+                        <option>light</option>
+                        <option>medium</option>
+                        <option>dark</option>
+                    </select>
+                    <label for="coffee-adding" class="font-weight-bold mt-2">Name</label>
+                    <div class="input-group">
+                        <input id="coffee-adding" type="text" class="form-control"/>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-4" id="create-coffee" type="button">Submit</button>
+                </form>
             </div>
         </div>
+
+
 
 
     </div>
