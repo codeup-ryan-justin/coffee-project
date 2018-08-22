@@ -23,7 +23,12 @@ function renderCoffees(coffees) {
 }
 
 function updateCoffees(e) {
-    e.preventDefault(); // don't submit the form, we just want to update the data
+    try {
+        e.preventDefault(); // don't submit the form, we just want to update the data
+    } catch {
+        
+    }
+
     let selectedRoast = roastSelection.value;
     let filterCoffee = coffeeSearch.value.toLowerCase();
     let filteredCoffees = [];
@@ -52,6 +57,8 @@ function createCoffee(e) {
         roast: document.getElementById("roast-adding").value,
     };
     coffees.push(coffee);
+    addedCoffees.push(coffee);
+    saveCoffeeToLocalStorage(coffee);
     updateCoffees(e);
 }
 
@@ -72,6 +79,11 @@ var coffees = [
     {id: 13, name: 'Italian', roast: 'dark'},
     {id: 14, name: 'French', roast: 'dark'},
 ];
+
+function resetCoffees() {
+    coffees.splice(14);
+    updateCoffees();
+}
 
 var contentBody = document.querySelector('#coffees');
 var submitButton = document.querySelector('#submit');
@@ -96,3 +108,39 @@ document.getElementById("coffee-adding")
             caller.value = "";
         }
     });
+
+// save added coffees in localStorage so they are not lost after refresh
+let addedCoffees = [];
+
+function saveCoffeeToLocalStorage(coffee) {
+   localStorage.setItem('coffees', JSON.stringify(addedCoffees));
+}
+
+function getCoffeeFromLocalStorage() {
+    if(localStorage.coffees) {
+        addedCoffees = addedCoffees.concat(JSON.parse(localStorage.getItem('coffees')));
+        coffees = coffees.concat(addedCoffees);
+        updateCoffees();
+    }
+}
+
+function clearCoffeeFromLocalStorage() {
+    if(localStorage.coffees) {}
+    localStorage.removeItem('coffees');
+    resetCoffees();
+}
+
+// when page has finished loading call getCoffeeFromLocalStorage
+document.addEventListener('DOMContentLoaded', function(e) {
+    getCoffeeFromLocalStorage();
+}, false);
+
+// add ctrl + alt + c keyboard shortcut to remove all coffee the user has added
+document.addEventListener('keyup', function (e) {
+    // console.log(e.which);
+    if (e.ctrlKey && e.altKey && e.which == 67) {
+        if(confirm("Are you sure you want to delete your created coffees?")){
+            clearCoffeeFromLocalStorage();
+        }
+    }
+});
