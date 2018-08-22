@@ -50,12 +50,14 @@ function updateCoffees(e) {
 
 function createCoffee(e) {
     e.preventDefault();
+    let nameTextBox = document.getElementById("coffee-adding");
     let id = coffees.length + 1;
     let coffee = {
         id: id,
-        name: document.getElementById("coffee-adding").value,
+        name: nameTextBox.value,
         roast: document.getElementById("roast-adding").value,
     };
+    nameTextBox.value = "";
     coffees.push(coffee);
     addedCoffees.push(coffee);
     saveCoffeeToLocalStorage(coffee);
