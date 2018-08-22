@@ -99,7 +99,7 @@ coffeeSearch.addEventListener('input', updateCoffees);
 
 // prevent pressing enter from refreshing the page
 coffeeSearch.addEventListener('keypress', function (e) {
-    if (e.keyCode == 13) {
+    if (e.key === "Enter") {
         e.preventDefault();
     }
 });
@@ -108,7 +108,7 @@ coffeeAdd.addEventListener('click', createCoffee);
 // listen for the enter key press and use it to submit the new coffee
 document.getElementById("coffee-adding")
     .addEventListener("keypress", function(e) {
-        if (e.keyCode == 13) {
+        if (e.key === "Enter") {
             e.preventDefault();
             createCoffee(e);
             let caller = e.target || e.srcElement;
@@ -119,7 +119,7 @@ document.getElementById("coffee-adding")
 // save added coffees in localStorage so they are not lost after refresh
 let addedCoffees = [];
 
-function saveCoffeeToLocalStorage(coffee) {
+function saveCoffeeToLocalStorage() {
    localStorage.setItem('coffees', JSON.stringify(addedCoffees));
 }
 
@@ -138,14 +138,13 @@ function clearCoffeeFromLocalStorage() {
 }
 
 // when page has finished loading call getCoffeeFromLocalStorage
-document.addEventListener('DOMContentLoaded', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
     getCoffeeFromLocalStorage();
 }, false);
 
 // add ctrl + alt + c keyboard shortcut to remove all coffee the user has added
 document.addEventListener('keyup', function (e) {
-    // console.log(e.which);
-    if (e.ctrlKey && e.altKey && e.which == 67) {
+    if (e.ctrlKey && e.altKey && e.code === "KeyC") {
         if(confirm("Are you sure you want to delete your created coffees?")){
             clearCoffeeFromLocalStorage();
         }
