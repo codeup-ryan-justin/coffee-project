@@ -1,11 +1,17 @@
-table {
-    border-collapse: collapse;
-    margin: 15px 0;
-}
-
-td, th {
-    border: 1px solid black;
-    padding: 5px 10px;
+.container-fluid:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/coffee.jpg");
+    /*background-blend-mode: lighten;*/
+    background-repeat: no-repeat;
+    /*background-position: 50% 0;*/
+    background-size: cover;
+    opacity: 0.4;
 }
 
 .roast {
